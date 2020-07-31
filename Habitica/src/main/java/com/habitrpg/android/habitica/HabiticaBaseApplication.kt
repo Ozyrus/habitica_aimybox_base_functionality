@@ -345,14 +345,9 @@ class CreateTask: CustomSkill<AimyboxRequest, AimyboxResponse> {
         if (response.data != null) {
             bundle.putString("activity_name", response.data?.get("taskName")?.asString)
             bundle.putString("activity_description", response.data?.get("taskDescription")?.asString)
-            response.data?.get("taskSentiment")?.asBoolean?.let { bundle.putBoolean("sentiment", it) } // no not have null problems
-            bundle.putString("activity_difficulty", response.data?.get("taskDifficulty")?.asString)
-
         } else {
             bundle.putString("activity_name", type)
             bundle.putString("activity_description", "Описание")
-            bundle.putBoolean("sentiment", true)
-            bundle.putString("activity_difficulty", "hard")
         }
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.putExtras(bundle)
